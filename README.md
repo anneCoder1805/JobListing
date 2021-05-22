@@ -10,11 +10,14 @@
 
 * Now Download the repository
   In VSCode, open the folder
-  Delete Node Modules
+  If you see Node Modules, Delete it
   Open Terminal (Mostly Located on TOP Bar in VScode)
   Write in terminal:
-    **npm install**
+    **npm install** 
+    
   This will reinstall node modules
 * Now write:
 **npm start**
+
+Run it (Press Enter!)
 
