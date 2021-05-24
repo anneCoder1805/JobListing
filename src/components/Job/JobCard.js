@@ -51,6 +51,11 @@ export default (props) => {
                     </Grid>
                     <Grid item>
                         <Box mt={2}>
+                            <Button onClick={props.openApplyModal} variant='outlined'>Apply</Button>
+                        </Box>
+                    </Grid>
+                    <Grid item>
+                        <Box mt={2}>
                             <Button onClick={props.open} variant='outlined'>Check</Button>
                         </Box>
                     </Grid>

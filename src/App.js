@@ -5,6 +5,7 @@ import theme from './theme/theme'
 import Header from './components/Header'
 import SeachBar from './components/SeachBar'
 import JobCard from './components/Job/JobCard'
+import ApplyModal from './components/Job/ApplyModal'
 import NewJobModal from './components/Job/NewJobModal'
 import { useState, useEffect } from "react";
 import { app, firestore } from "./firebase/config";
@@ -14,6 +15,7 @@ export default () => {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [custom, setCustom] = useState(false)
+  const [applyJobData, applyJobPost] = useState({state: false, data: {}})
   const [newJobPost, setNewJobPost] = useState(false)
   const [viewJob, setViewJob] = useState({})
 
@@ -47,11 +49,24 @@ export default () => {
     fetchJobs();
   }
 
+  const postApplication = async(applicationDetails) => {
+    await firestore.collection('applications').add({
+      ...applicationDetails, 
+      postedOn: app.firestore.FieldValue.serverTimestamp()
+    })
+    fetchJobs();
+  }
+
   useEffect(() => {
     fetchJobs();
   }, [])
   return <ThemeProvider theme={theme}>
     <Header openNewJobPost={() => setNewJobPost(true)}/>
+    <ApplyModal
+        closeApplyModal={() => applyJobPost({state: false, data: {}})}
+        applyJobData={applyJobData}
+        postApplication={postApplication}
+    />
     <NewJobModal closeJobPost={() => setNewJobPost(false)}
     newJobPost={newJobPost} postJob={postJob}/>
     <ViewJobModal job={viewJob} closeModal={() => setViewJob({})}/>
@@ -70,7 +85,7 @@ export default () => {
               </Button>
             </Box>
             )}
-            {jobs.map((job) => (<JobCard open ={() =>setViewJob(job)} key={job.id} {...job}/>
+            {jobs.map((job) => (<JobCard open ={() =>setViewJob(job)} key={job.id} {...job} openApplyModal={() => applyJobPost({state: true, data: job})} />
           ))}
           </>
           )}

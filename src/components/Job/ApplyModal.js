@@ -4,6 +4,7 @@ import {Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle,
 import {Close as CloseIcon} from '@material-ui/icons'
     
 const initState = {
+    jobID: '',
     title: '',
     type: 'Full Time',
     companyName: '',
@@ -15,38 +16,40 @@ const initState = {
 }
 export default (props) => {
     const [loading, setLoading] = useState(false)
-    const [jobDetails, setJobDetails] = useState(initState);
+    const [applicationDetails, setApplicationDetails] = useState(initState);
     
     const handleChange = (e) => {
         e.persist();
-        setJobDetails(oldState => ({...oldState, [e.target.name]:e.target.value}))
+        setApplicationDetails(oldState => ({...oldState, [e.target.name]:e.target.value}))
     }
     
     const addSkills = (skill) => {
-        setJobDetails(oldState => ({...oldState, skills: oldState.skills.concat(skill)}))
+        setApplicationDetails(oldState => ({...oldState, skills: oldState.skills.concat(skill)}))
     }
 
     const handleSubmit = async() => {
-        for(const field in jobDetails) {
-            if(typeof jobDetails[field]==='string' && !jobDetails[field])return;
+        for(const field in applicationDetails) {
+            if(typeof applicationDetails[field]==='string' && !applicationDetails[field])return;
         }
         setLoading(true);
-        await props.postJob(jobDetails);
-        closeJobPost()
+        await props.postApplication({jobID: props.applyJobData.data.id, ...applicationDetails});
+        closeApplyModal()
     }
 
-    const closeJobPost = () => {
-        setJobDetails(initState);
+    const closeApplyModal = () => {
+        setApplicationDetails(initState);
         setLoading(false)
-        props.closeJobPost()
+        props.closeApplyModal()
     }
 
+    console.log('Passed on Job Details: ', props.applyJobData.data)
+    console.log('Local State applicationDetails: ',applicationDetails);
     return(
-        <Dialog open={props.newJobPost} fullWidth>
+        <Dialog open={props.applyJobData.state} fullWidth>
             <DialogTitle>
                 <Box display='flex' justifyContent='space-between'>
-                Post Job
-                <IconButton onClick={closeJobPost}>
+                Apply for this Post
+                <IconButton onClick={closeApplyModal}>
                     <CloseIcon/>
                 </IconButton>
                 </Box>
@@ -54,10 +57,16 @@ export default (props) => {
             <DialogContent>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
+                        Applying for: {props.applyJobData.data.title}
+                    </Grid>
+                    <Grid item xs={6}>
+                        Company: {props.applyJobData.data.companyName}
+                    </Grid>
+                    <Grid item xs={6}>
                         <FilledInput
                         onChange={handleChange}
                         name='title'
-                        value={jobDetails.title} 
+                        value={applicationDetails.title} 
                         autoComplete='off' 
                         placeholder='Job Title *' 
                         disableUnderline fullWidth/>
@@ -67,7 +76,7 @@ export default (props) => {
                         <Select 
                         onChange={handleChange}
                         name='type'
-                        value={jobDetails.type}
+                        value={applicationDetails.type}
                         disableUnderline 
                         variant='filled'  
                         fullWidth>
@@ -82,7 +91,7 @@ export default (props) => {
                         <FilledInput 
                         onChange={handleChange}
                         name='companyName'
-                        value={jobDetails.companyName}
+                        value={applicationDetails.companyName}
                         autoComplete='off'  
                         placeholder='Company/Requestor *' 
                         disableUnderline fullWidth/>
@@ -91,7 +100,7 @@ export default (props) => {
                         <FilledInput 
                         onChange={handleChange}
                         name='companyUrl'
-                        value={jobDetails.companyUrl}
+                        value={applicationDetails.companyUrl}
                         autoComplete='off'  
                         placeholder='Website/ On-Site City*' 
                         disableUnderline fullWidth/>
@@ -101,7 +110,7 @@ export default (props) => {
                         <Select 
                         onChange={handleChange}
                         name='location'
-                        value={jobDetails.location}
+                        value={applicationDetails.location}
                         autoComplete='off'  
                         placeholder='Job Location *' 
                         disableUnderline fullWidth>
@@ -113,7 +122,7 @@ export default (props) => {
                         <FilledInput 
                         onChange={handleChange}
                         name='link'
-                        value={jobDetails.link}
+                        value={applicationDetails.link}
                         autoComplete='off'  
                         placeholder='Job Link/ Email*' 
                         disableUnderline fullWidth/>
@@ -123,7 +132,7 @@ export default (props) => {
                         <FilledInput 
                         onChange={handleChange}
                         name='description'
-                        value={jobDetails.description}
+                        value={applicationDetails.description}
                         autoComplete='off' 
                         placeholder='Job Description'
                         disableUnderline
@@ -151,7 +160,7 @@ export default (props) => {
                     disabled={loading}>
                         {loading ? (
                          <CircularProgress color='secondary' size={22}/>
-                        ): ('Post Job')}</Button>
+                        ): ('Submit your Application')}</Button>
                 </Box>
             </DialogActions>
         </Dialog>
