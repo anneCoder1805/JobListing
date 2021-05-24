@@ -4,15 +4,17 @@ import {Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle,
 import {Close as CloseIcon} from '@material-ui/icons'
     
 const initState = {
-    jobID: '',
-    title: '',
-    type: 'Full Time',
-    companyName: '',
-    companyUrl: '',
-    location: 'Remote',
-    link: '',
-    description: '',
+    name: '',
+    emailaddress: '',
+    age: '',
+    address: '',
+    gender :'Male',
+    desiredsalary: '',
+    experience: '',
+    anythingelse: '',
     skills: [],
+
+   
 }
 export default (props) => {
     const [loading, setLoading] = useState(false)
@@ -65,77 +67,83 @@ export default (props) => {
                     <Grid item xs={6}>
                         <FilledInput
                         onChange={handleChange}
-                        name='title'
-                        value={applicationDetails.title} 
+                        name='name'
+                        value={applicationDetails.name} 
                         autoComplete='off' 
-                        placeholder='Job Title *' 
+                        placeholder='Name *' 
+                        disableUnderline fullWidth/>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                        <FilledInput 
+                        onChange={handleChange}
+                        name='emailaddress'
+                        value={applicationDetails.emailaddress}
+                        autoComplete='off'  
+                        placeholder='Email address *' 
+                        disableUnderline fullWidth/>
+                    </Grid>
+                    
+                     <Grid item xs={12}>
+                        <FilledInput 
+                        onChange={handleChange}
+                        name='address'
+                        value={applicationDetails.address}
+                        autoComplete='off'  
+                        placeholder='Address *' 
+                        disableUnderline fullWidth/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FilledInput 
+                        onChange={handleChange}
+                        name='age'
+                        value={applicationDetails.age}
+                        autoComplete='off'  
+                        placeholder='Age *' 
                         disableUnderline fullWidth/>
                     </Grid>
 
                     <Grid item xs={6}>
                         <Select 
                         onChange={handleChange}
-                        name='type'
-                        value={applicationDetails.type}
-                        disableUnderline 
-                        variant='filled'  
-                        fullWidth>
-                            <MenuItem value='Full Time'>Full Time</MenuItem>
-                            <MenuItem value='Part Time'>Part Time</MenuItem>
-                            <MenuItem value='Contract'>Contract</MenuItem>
-                            <MenuItem value='One Time Service'>One Time Service</MenuItem>
-                        </Select>                  
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <FilledInput 
-                        onChange={handleChange}
-                        name='companyName'
-                        value={applicationDetails.companyName}
+                        name='gender'
+                        value={applicationDetails.gender}
                         autoComplete='off'  
-                        placeholder='Company/Requestor *' 
-                        disableUnderline fullWidth/>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FilledInput 
-                        onChange={handleChange}
-                        name='companyUrl'
-                        value={applicationDetails.companyUrl}
-                        autoComplete='off'  
-                        placeholder='Website/ On-Site City*' 
-                        disableUnderline fullWidth/>
-                    </Grid>
-
-                    <Grid item xs={6}>
-                        <Select 
-                        onChange={handleChange}
-                        name='location'
-                        value={applicationDetails.location}
-                        autoComplete='off'  
-                        placeholder='Job Location *' 
+                        placeholder='Gender *' 
                         disableUnderline fullWidth>
-                            <MenuItem value='Remote'>Remote</MenuItem>
-                            <MenuItem value='On-Site'>On Site</MenuItem>
+                            <MenuItem value='Male'>Male</MenuItem>
+                            <MenuItem value='Female'>Female</MenuItem>
+                            <MenuItem value='prefer not to say'>Prefer not to say</MenuItem>
                         </Select>
                     </Grid>
                     <Grid item xs={6}>
                         <FilledInput 
                         onChange={handleChange}
-                        name='link'
-                        value={applicationDetails.link}
+                        name='experience'
+                        value={applicationDetails.experience}
                         autoComplete='off'  
-                        placeholder='Job Link/ Email*' 
+                        placeholder='Experience(in years) *' 
+                        disableUnderline fullWidth/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FilledInput 
+                        onChange={handleChange}
+                        name='desiredsalary'
+                        value={applicationDetails.desiredsalary}
+                        autoComplete='off'  
+                        placeholder='Desired Salary ' 
                         disableUnderline fullWidth/>
                     </Grid>
 
                     <Grid item xs={12}>
                         <FilledInput 
                         onChange={handleChange}
-                        name='description'
-                        value={applicationDetails.description}
+                        name='anythingelse'
+                        value={applicationDetails.anythingelse}
                         autoComplete='off' 
-                        placeholder='Job Description'
+                        placeholder='Tell us more about yourself and past experience'
                         disableUnderline
+                        
                         fullWidth
                         multiline rows={4}/>
                     </Grid>
