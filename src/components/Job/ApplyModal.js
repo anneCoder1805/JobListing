@@ -4,7 +4,7 @@ import {Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle,
 import {Close as CloseIcon} from '@material-ui/icons'
     
 const initState = {
-    jobID: '',
+   
     title: '',
     type: 'Full Time',
     companyName: '',
