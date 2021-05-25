@@ -16,6 +16,9 @@ const useStyles = makeStyles({
             margin: '8px',
         },
     },
+    bstyle:{
+        backgroundColor:"#339989",
+    }
 });
 export default (props) => {
     const [loading, setLoading] = useState(false)
@@ -53,7 +56,7 @@ export default (props) => {
             </Select>
             <Button disabled={loading} 
             variant='contained' 
-            color='primary' 
+            className={classes.bstyle} 
             disableElevation
             onClick={search}>
             {loading ? (

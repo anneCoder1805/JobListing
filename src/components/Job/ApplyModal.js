@@ -1,8 +1,14 @@
 import React, {useState} from 'react'
 import {Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, 
-    DialogContent, Typography, DialogActions, Button, IconButton, CircularProgress} from '@material-ui/core'
+    DialogContent, Typography, DialogActions, Button, IconButton, CircularProgress, makeStyles} from '@material-ui/core'
 import {Close as CloseIcon} from '@material-ui/icons'
-    
+   
+const useStyles = makeStyles({
+    wrapper: {
+        backgroundColor: "#2F6359",
+    }
+})
+
 const initState = {
     name: '',
     emailaddress: '',
@@ -17,6 +23,7 @@ const initState = {
    
 }
 export default (props) => {
+    const classes = useStyles()
     const [loading, setLoading] = useState(false)
     const [applicationDetails, setApplicationDetails] = useState(initState);
     
@@ -164,10 +171,10 @@ export default (props) => {
                     <Typography variant='caption'>*Required</Typography>
                     <Button onClick={handleSubmit}
                     variant='contained' disableElevation
-                    color='primary'
+                    className={classes.wrapper}
                     disabled={loading}>
                         {loading ? (
-                         <CircularProgress color='secondary' size={22}/>
+                         <CircularProgress className={classes.wrapper} size={22}/>
                         ): ('Submit your Application')}</Button>
                 </Box>
             </DialogActions>

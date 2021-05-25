@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, Grid, Dialog, DialogTitle, 
-    DialogContent, Typography, DialogActions, Button,
+    DialogContent, Typography,
     IconButton, makeStyles} from '@material-ui/core'
 import {Close as CloseIcon} from '@material-ui/icons'
 import {format} from 'date-fns'
@@ -75,12 +75,6 @@ export default (props) => {
                     </Box>
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button variant='outlined' component='a' 
-                href={props.job.link} target='_blank'>
-                    Apply
-                </Button>
-            </DialogActions>
         </Dialog>
     );
 }

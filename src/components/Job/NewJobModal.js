@@ -1,8 +1,14 @@
 import React, {useState} from 'react'
 import {Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, 
-    DialogContent, Typography, DialogActions, Button, IconButton, CircularProgress} from '@material-ui/core'
+    DialogContent, Typography, makeStyles, DialogActions, Button, IconButton, CircularProgress} from '@material-ui/core'
 import {Close as CloseIcon} from '@material-ui/icons'
-    
+ 
+const useStyles = makeStyles({
+    wrapper: {
+        backgroundColor: "#2F6359",
+    }
+})
+
 const initState = {
     title: '',
     type: 'Full Time',
@@ -14,6 +20,7 @@ const initState = {
     skills: [],
 }
 export default (props) => {
+    const classes = useStyles()
     const [loading, setLoading] = useState(false)
     const [jobDetails, setJobDetails] = useState(initState);
     
@@ -41,7 +48,8 @@ export default (props) => {
         props.closeJobPost()
     }
 
-    return(
+        
+        return(
         <Dialog open={props.newJobPost} fullWidth>
             <DialogTitle>
                 <Box display='flex' justifyContent='space-between'>
@@ -147,15 +155,14 @@ export default (props) => {
                     <Typography variant='caption'>*Required</Typography>
                     <Button onClick={handleSubmit}
                     variant='contained' disableElevation
-                    color='primary'
+                    className={classes.wrapper}
                     disabled={loading}>
                         {loading ? (
-                         <CircularProgress color='secondary' size={22}/>
+                         <CircularProgress className={classes.wrapper} size={22}/>
                         ): ('Post Job')}</Button>
                 </Box>
             </DialogActions>
         </Dialog>
     );
 }
-
 
