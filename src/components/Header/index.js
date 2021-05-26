@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     hcolor:{
         backgroundColor: "rgba(0,0,0,0.8)", //
     }, 
+    ml:{
+        marginLeft:'15px',
+    }
     
     });
 
@@ -24,14 +27,23 @@ export default (props) => {
         <Grid container justify='center'>
             <Grid item xs={10}>
                 <Box display='flex' justifyContent='space-between'>
-                    <Typography variant='h4'>
+                <Box display='flex' justifyContent='flex-start'>
+                <img src='logo.png' alt='vistar' height='60px' width='60px'/>
+                    <Typography variant='h4' className={classes.ml}>
                         Open Job Listing
-                    </Typography>
+                    </Typography></Box>
+                    <Box display='flex' justifyContent='flex-end'>
                     <Button onClick={props.openNewJobPost} 
-                    className={classes.wrapper}
+                    className={classes.wrapper} 
                     variant='contained' disableElevation>
                         Post a Job
                     </Button>
+                    <Button target="_blank" href="https://kritikashah20.github.io/React-LandingPage/" 
+                    className={`${classes.wrapper} ${classes.ml}`}
+                    variant='contained' disableElevation>
+                        About Vistar
+                    </Button>
+                    </Box>
                 </Box>
             </Grid>
         </Grid>
