@@ -30,7 +30,7 @@ export default (props) => {
                 <Box display='flex' justifyContent='flex-start'>
                 <img src='logo.png' alt='vistar' height='60px' width='60px'/>
                     <Typography variant='h4' className={classes.ml}>
-                        Open Job Listing
+                        Vistar Jobs
                     </Typography></Box>
                     <Box display='flex' justifyContent='flex-end'>
                     <Button onClick={props.openNewJobPost} 
